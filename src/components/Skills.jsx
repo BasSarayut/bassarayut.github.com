@@ -20,7 +20,7 @@ const Skills = () => {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem' }}>
                 {group.items.map((skill, idx) => (
                   <span key={idx} style={{ 
-                    background: 'rgba(255, 255, 255, 0.05)', 
+                    background: 'rgba(0, 0, 0, 0.03)', 
                     padding: '0.5rem 1rem', 
                     borderRadius: '50px', 
                     fontSize: '0.9rem',

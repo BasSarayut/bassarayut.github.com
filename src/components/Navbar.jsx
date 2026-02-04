@@ -28,7 +28,7 @@ const Navbar = () => {
       zIndex: 100, 
       transition: 'all 0.3s var(--algo-ease)',
       backdropFilter: scrolled ? 'blur(10px)' : 'none',
-      background: scrolled ? 'rgba(5, 5, 5, 0.8)' : 'transparent',
+      background: scrolled ? 'rgba(255, 255, 255, 0.8)' : 'transparent',
       borderBottom: scrolled ? '1px solid var(--glass-border)' : 'none'
     }}>
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
