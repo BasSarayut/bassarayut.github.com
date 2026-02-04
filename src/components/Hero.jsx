@@ -12,29 +12,44 @@ const Hero = () => {
       paddingTop: '60px' // For fixed navbar
     }}>
       {/* Background Gradient Mesh */}
+
       <div style={{
         position: 'absolute',
-        top: '-20%',
+        top: '-10%',
         left: '-10%',
-        width: '50vw',
-        height: '50vw',
-        background: 'radial-gradient(circle, var(--primary-accent) 0%, transparent 70%)',
-        opacity: 0.15,
-        filter: 'blur(80px)',
+        width: '60vw',
+        height: '60vw',
+        background: 'radial-gradient(circle, var(--primary-accent) 0%, transparent 60%)',
+        opacity: 0.12,
+        filter: 'blur(90px)',
         zIndex: -1,
-        animation: 'slideUp 5s infinite alternate ease-in-out'
+        animation: 'slideUp 8s infinite alternate ease-in-out'
       }}></div>
       
       <div style={{
         position: 'absolute',
         bottom: '-10%',
-        right: '-10%',
-        width: '40vw',
-        height: '40vw',
-        background: 'radial-gradient(circle, var(--tertiary-accent) 0%, transparent 70%)',
-        opacity: 0.1,
+        right: '-5%',
+        width: '50vw',
+        height: '50vw',
+        background: 'radial-gradient(circle, var(--secondary-accent) 0%, transparent 70%)',
+        opacity: 0.12,
         filter: 'blur(100px)',
-        zIndex: -1
+        zIndex: -1,
+        animation: 'slideUp 10s infinite alternate-reverse ease-in-out'
+      }}></div>
+
+       <div style={{
+        position: 'absolute',
+        top: '40%',
+        left: '20%',
+        width: '30vw',
+        height: '30vw',
+        background: 'radial-gradient(circle, var(--tertiary-accent) 0%, transparent 70%)',
+        opacity: 0.08,
+        filter: 'blur(80px)',
+        zIndex: -1,
+        animation: 'slideUp 12s infinite alternate ease-in-out'
       }}></div>
 
       <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
@@ -70,26 +85,32 @@ const Hero = () => {
         
         <div className="animate-fade-in delay-300" style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center' }}>
           <button style={{ 
-            backgroundColor: 'var(--primary-accent)', 
-            color: '#000', 
+            background: 'linear-gradient(135deg, var(--primary-accent), var(--secondary-accent))', 
+            color: '#fff', 
             fontWeight: 700,
-            padding: '1rem 2rem',
+            padding: '1rem 2.5rem',
             borderRadius: '50px',
-            fontSize: '1rem',
-            boxShadow: '0 0 20px rgba(0, 242, 234, 0.3)'
+            fontSize: '1.1rem',
+            boxShadow: '0 10px 30px -5px rgba(56, 189, 248, 0.5), inset 0 2px 0 rgba(255,255,255,0.4)',
+            transition: 'transform 0.3s var(--fluid-ease), box-shadow 0.3s ease',
+            position: 'relative',
+            overflow: 'hidden',
+            border: '1px solid rgba(255,255,255,0.2)'
           }}>
             View My Work
           </button>
           
           <button className="glass-card" style={{ 
-            background: 'rgba(255, 255, 255, 0.9)',
+            background: 'var(--surface-color)',
             color: 'var(--text-primary)', 
             fontWeight: 500,
-            padding: '1rem 2rem',
+            padding: '1rem 2.5rem',
             borderRadius: '50px',
-            fontSize: '1rem',
-            border: '1px solid rgba(0, 0, 0, 0.05)',
-            boxShadow: '0 4px 6px rgba(0,0,0,0.05)'
+            fontSize: '1.1rem',
+            border: '1px solid var(--glass-border)',
+            borderTop: '1px solid var(--glass-highlight)',
+            boxShadow: 'var(--glass-shadow)',
+            transition: 'transform 0.3s var(--fluid-ease)',
           }}>
             Contact Me
           </button>

@@ -1,31 +1,36 @@
 :root {
-  /* Premium Light Theme Palette */
-  --bg-color: #f8faff;       /* Light Cool Gray/White */
-  --surface-color: #ffffff;  /* Pure White */
-  --surface-color-hover: #f0f4f8;
+  /* iOS 26 Liquid Glass Palette - Blue & Pink Core */
+  --bg-color: #f0f7ff;       
+  --surface-color: rgba(255, 255, 255, 0.45); 
+  --surface-highlight: rgba(255, 255, 255, 0.95);
   
-  /* Accents */
-  --primary-accent: #0ea5e9;  /* Vivid Sky Blue */
-  --secondary-accent: #ec4899; /* Hot Pink */
-  --tertiary-accent: #8b5cf6; /* Violet */
+  /* Vibrant Fluids */
+  --primary-accent: #38bdf8;  /* Sky Blue */
+  --secondary-accent: #f472b6; /* Soft Pink */
+  --tertiary-accent: #a78bfa; /* Violet */
   
-  /* Text */
-  --text-primary: #1e293b;    /* Slate 800 - High Contrast */
-  --text-secondary: #64748b;  /* Slate 500 - Medium Contrast */
-  --text-tertiary: #94a3b8;   /* Slate 400 - Low Contrast */
+  /* Text - Crisp and High Contrast */
+  --text-primary: #1d1d35;    
+  --text-secondary: #585875;  
+  --text-tertiary: #9e9eb5;
 
-  /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.8);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15); /* New shadow var */
-  --glass-blur: 12px;
+  /* Liquid Glass Physics */
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --glass-shadow: 
+    0 20px 40px rgba(0, 50, 100, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset; /* Top light lip */
+  --glass-blur: 40px;
+  --liquid-radius: 32px;
 
   /* Font */
-  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Outfit', sans-serif;
+  --font-main: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
   
   /* Animation */
-  --algo-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --fluid-ease: cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy/Liquid feel */
+  --algo-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 * {
@@ -36,14 +41,19 @@
 
 body {
   font-family: var(--font-main);
-  background-color: var(--bg-color);
+  background: 
+    radial-gradient(circle at 15% 50%, rgba(240, 249, 255, 0.8), transparent 25%), 
+    radial-gradient(circle at 85% 30%, rgba(255, 240, 249, 0.8), transparent 25%),
+    linear-gradient(180deg, #f8faff 0%, #fefeff 100%);
+  background-attachment: fixed;
+  background-size: cover;
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,h2,h3,h4,h5,h6 {
   font-family: var(--font-display);
   font-weight: 700;
   line-height: 1.1;
@@ -53,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
 a {
   color: inherit;
   text-decoration: none;
-  transition: color 0.3s var(--algo-ease);
+  transition: color 0.3s var(--fluid-ease);
 }
 
 button {
@@ -76,15 +86,31 @@ button {
   background-clip: text;
   color: transparent;
   display: inline-block;
+  filter: drop-shadow(0 2px 10px rgba(56, 189, 248, 0.2));
 }
 
 .glass-card {
-  background: var(--glass-bg);
+  background: linear-gradient(145deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.1) 100%);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border);
+  border-top: 1px solid var(--glass-highlight);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: var(--glass-shadow);
-  border-radius: 16px;
+  border-radius: var(--liquid-radius);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s var(--fluid-ease), box-shadow 0.4s ease;
+}
+
+/* Shine effect on hover */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(210deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 30%);
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 /* Scrollbar */
@@ -103,19 +129,35 @@ button {
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-  from { transform: translateY(30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .animate-fade-in {
@@ -127,7 +169,12 @@ button {
   animation: slideUp 1s var(--algo-ease) forwards;
 }
 
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-
+.delay-100 {
+  animation-delay: 0.1s;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}

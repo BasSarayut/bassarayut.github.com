@@ -1,11 +1,6 @@
 import React from 'react';
 import RevealOnScroll from './RevealOnScroll';
-
-const skillsData = [
-  { category: "Frontend", items: ["React", "JavaScript (ES6+)", "Tailwind CSS", "HTML5/CSS3", "Framer Motion"] },
-  { category: "Backend", items: ["Node.js", "Express", "Firebase", "REST APIs"] },
-  { category: "Tools", items: ["Git", "Vite", "Figma", "VS Code"] }
-];
+import { skillsData } from '../data/skillsData';
 
 const Skills = () => {
   return (
