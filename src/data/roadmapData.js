@@ -23,7 +23,7 @@ export const roadmapData = [
     ]
   },
   {
-    quarter: "Q3 - Q4",
+    quarter: "Continuous",
     title: "Artistic Expression",
     category: "Creativity",
     color: "var(--tertiary-accent)",

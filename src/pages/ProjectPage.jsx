@@ -164,6 +164,18 @@ const ProjectPage = () => {
             </div>
 
              <style>{`
+                @media (max-width: 768px) {
+                    .container {
+                        padding-left: 1.5rem !important;
+                        padding-right: 1.5rem !important;
+                    }
+                    article {
+                        padding-top: 60px !important;
+                    }
+                    h1.gradient-text {
+                        font-size: 2.5rem !important;
+                    }
+                }
                 section h3 {
                     font-size: 1.4rem;
                     margin-top: 1.5rem;

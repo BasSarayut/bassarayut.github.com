@@ -8,7 +8,7 @@ const Skills = () => {
       <RevealOnScroll>
         <h2 className="gradient-text" style={{ fontSize: '2.5rem', marginBottom: '3rem', textAlign: 'center', display: 'block' }}>Technical Skills</h2>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
           {skillsData.map((group, index) => (
             <div key={index} className="glass-card" style={{ padding: '2rem', transition: 'transform 0.3s ease' }}>
               <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', color: 'var(--primary-accent)' }}>{group.category}</h3>

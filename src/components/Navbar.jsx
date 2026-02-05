@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { menuItems } from '../data/menuData';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -91,9 +92,12 @@ const Navbar = () => {
                         letterSpacing: '-0.5px',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '0.2rem'
+                        gap: '0.5rem',
+                        color: 'var(--text-primary)',
+                        textDecoration: 'none'
                     }}>
-                        Sarayut<span style={{ color: 'var(--primary-accent)', fontSize: '1.5rem', lineHeight: 0 }}>.</span>
+                        Sarayut
+                        <div className="logo-dot"></div>
                     </a>
 
                     {/* Desktop Menu */}
@@ -121,14 +125,22 @@ const Navbar = () => {
                                 {item.label}
                             </a>
                         ))}
+                        <div style={{ marginLeft: '1rem' }}>
+                             <ThemeToggle />
+                        </div>
                     </div>
 
                     {/* Mobile Menu Button */}
-                    <div className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                        <div className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                         <div className="mobile-only" style={{ display: 'none' }}>
+                            <ThemeToggle />
+                         </div>
+                        <div className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                            <div className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -241,7 +253,23 @@ const Navbar = () => {
         @media (max-width: 768px) {
           .desktop-menu { display: none !important; }
           .mobile-menu-btn { display: flex !important; }
+          .mobile-only { display: block !important; }
         }
+        .logo-dot {
+          width: 8px;
+          height: 8px;
+          background: var(--primary-accent);
+          border-radius: 50%;
+          box-shadow: 0 0 10px var(--primary-accent);
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+          0% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); }
+          70% { box-shadow: 0 0 0 6px rgba(14, 165, 233, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
+        }
+
       `}</style>
         </>
     );

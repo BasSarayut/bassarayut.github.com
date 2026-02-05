@@ -3,7 +3,7 @@ import RevealOnScroll from './RevealOnScroll';
 
 const Contact = () => {
   return (
-    <section id="contact" className="container" style={{ padding: '8rem 2rem 4rem', textAlign: 'center' }}>
+    <section id="contact" className="container" style={{ padding: '6rem 2rem 4rem', textAlign: 'center' }}>
       <RevealOnScroll>
         <div className="glass-card" style={{ padding: '4rem 2rem', maxWidth: '800px', margin: '0 auto', background: 'linear-gradient(180deg, var(--glass-bg) 0%, rgba(255,255,255,0) 100%)' }}>
           <h2 className="gradient-text" style={{ fontSize: '3rem', marginBottom: '1rem' }}>Let's Work Together</h2>

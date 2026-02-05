@@ -33,6 +33,33 @@
   --algo-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+[data-theme='dark'] {
+  /* Midnight Glass Palette */
+  --bg-color: #0f172a;       
+  --surface-color: rgba(15, 23, 42, 0.6); 
+  --surface-highlight: rgba(30, 41, 59, 0.8);
+  --surface-color-hover: rgba(30, 41, 59, 0.9);
+  
+  /* Neon Fluids - Higher Luminosity */
+  --primary-accent: #38bdf8;  /* Sky Blue - Keeps same but glows more on dark */
+  --secondary-accent: #f472b6; /* Soft Pink */
+  --tertiary-accent: #a78bfa; /* Violet */
+  
+  /* Text */
+  --text-primary: #f8fafc;    
+  --text-secondary: #94a3b8;  
+  --text-tertiary: #64748b;
+
+  /* Dark Liquid Glass Physics */
+  --glass-bg: rgba(15, 23, 42, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.08); /* Subtle crisp edge */
+  --glass-highlight: rgba(255, 255, 255, 0.15);
+  --glass-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -41,10 +68,11 @@
 
 body {
   font-family: var(--font-main);
-  background: 
-    radial-gradient(circle at 15% 50%, rgba(240, 249, 255, 0.8), transparent 25%), 
-    radial-gradient(circle at 85% 30%, rgba(255, 240, 249, 0.8), transparent 25%),
-    linear-gradient(180deg, #f8faff 0%, #fefeff 100%);
+  background: var(--bg-color);
+  background-image: 
+    radial-gradient(circle at 15% 50%, var(--surface-highlight), transparent 25%), 
+    radial-gradient(circle at 85% 30%, var(--surface-highlight), transparent 25%);
+  background-color: var(--bg-color);
   background-attachment: fixed;
   background-size: cover;
   color: var(--text-primary);
@@ -78,6 +106,12 @@ button {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
 }
 
 .gradient-text {

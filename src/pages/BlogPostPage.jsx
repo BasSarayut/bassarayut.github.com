@@ -133,6 +133,15 @@ const BlogPostPage = () => {
             </div>
             
             <style>{`
+                @media (max-width: 768px) {
+                    .container {
+                        padding-left: 1.5rem !important;
+                        padding-right: 1.5rem !important;
+                    }
+                    article {
+                        padding-top: 60px !important;
+                    }
+                }
                 article h3 {
                     font-size: 1.8rem;
                     margin-top: 2rem;

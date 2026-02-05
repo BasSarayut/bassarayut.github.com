@@ -83,7 +83,12 @@ const Hero = () => {
           A passionate developer crafting premium digital experiences with modern web technologies.
         </p>
         
-        <div className="animate-fade-in delay-300" style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center' }}>
+        <div className="animate-fade-in delay-300" style={{ 
+          display: 'flex', 
+          gap: '1.5rem', 
+          justifyContent: 'center',
+          flexWrap: 'wrap' 
+        }}>
           <button style={{ 
             background: 'linear-gradient(135deg, var(--primary-accent), var(--secondary-accent))', 
             color: '#fff', 

@@ -17,7 +17,7 @@ const Roadmap = () => {
 
                 <div style={{ 
                     display: 'grid', 
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', 
                     gap: '2rem',
                     position: 'relative'
                 }}>
