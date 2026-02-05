@@ -29,6 +29,27 @@ const SEO = ({ title, description, image, url }) => {
             <meta property="twitter:title" content={fullTitle} />
             <meta property="twitter:description" content={description || defaultDescription} />
             <meta property="twitter:image" content={image || defaultImage} />
+
+            {/* Structured Data (JSON-LD) */}
+            <script type="application/ld+json">
+                {JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "Person",
+                    "name": "Sarayut",
+                    "url": siteUrl,
+                    "image": defaultImage,
+                    "sameAs": [
+                        "https://github.com/bassarayut",
+                        "https://line.me/ti/p/~bbassarayut"
+                    ],
+                    "jobTitle": "Web Developer",
+                    "worksFor": {
+                        "@type": "Organization",
+                        "name": "Freelance"
+                    },
+                    "description": defaultDescription
+                })}
+            </script>
         </Helmet>
     );
 };
