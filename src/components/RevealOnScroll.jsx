@@ -1,44 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 
-const RevealOnScroll = ({ children, threshold = 0.1, delay = 0 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold: threshold,
-        rootMargin: '0px 0px -50px 0px'
-      }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [threshold]);
-
+const RevealOnScroll = ({ children, delay = 0, width = "100%" }) => {
   return (
-    <div 
-      ref={ref} 
-      className={isVisible ? 'animate-slide-up' : ''} 
-      style={{ 
-        opacity: isVisible ? 1 : 0, 
-        animationDelay: `${delay}s`
-      }}
-    >
-      {children}
+    <div style={{ width }}>
+      <motion.div
+        variants={{
+          hidden: { opacity: 0, y: 75 },
+          visible: { opacity: 1, y: 0 },
+        }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }} // Reveals when 30% visible
+        transition={{ duration: 0.8, delay: delay, ease: [0.25, 0.25, 0.25, 0.75] }} // Smooth Apple-like eaasing
+      >
+        {children}
+      </motion.div>
     </div>
   );
 };

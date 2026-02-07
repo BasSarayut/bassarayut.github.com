@@ -1,4 +1,5 @@
 import React from 'react';
+import { TypeAnimation } from 'react-type-animation';
 
 const Hero = () => {
   return (
@@ -71,7 +72,23 @@ const Hero = () => {
           lineHeight: 1.1
         }}>
           Hello, I'm <br />
-          <span className="gradient-text">Sarayut</span>
+          <span className="gradient-text">
+            <TypeAnimation
+              sequence={[
+                'Sarayut',
+                1000,
+                'a Developer',
+                1000,
+                'a Creator',
+                1000,
+                'a Dreamer',
+                1000
+              ]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+            />
+          </span>
         </h1>
         
         <p className="animate-slide-up delay-300" style={{ 

@@ -1,19 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import { ChevronUp } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const BackToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.scrollY > 300) {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scroll = totalScroll / windowHeight;
+
+      setScrollProgress(scroll * 100);
+
+      if (totalScroll > 100) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
       }
     };
 
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToTop = () => {
@@ -24,66 +35,61 @@ const BackToTop = () => {
   };
 
   return (
-    <>
-      <button
-        onClick={scrollToTop}
-        style={{
-          position: 'fixed',
-          bottom: '2rem',
-          right: '2rem',
-          padding: '0',
-          width: '56px',
-          height: '56px',
-          borderRadius: '50%',
-          background: 'linear-gradient(135deg, var(--primary-accent), var(--secondary-accent))',
-          color: '#fff',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-          opacity: isVisible ? 1 : 0,
-          visibility: isVisible ? 'visible' : 'hidden',
-          transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(40px) scale(0.8)',
-          transition: 'all 0.5s var(--fluid-ease)',
-          zIndex: 1000,
-          boxShadow: '0 10px 30px -5px rgba(56, 189, 248, 0.6), inset 0 2px 0 rgba(255,255,255,0.4)',
-          border: '1px solid rgba(255,255,255,0.3)'
-        }}
-        aria-label="Back to Top"
-      >
-        {/* Glossy reflection */}
-        <div style={{
-            position: 'absolute',
-            top: '5px',
-            left: '10px',
-            width: '20px',
-            height: '10px',
-            borderRadius: '10px',
-            background: 'linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%)',
-            pointerEvents: 'none'
-        }}></div>
-
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.5, y: 20 }}
+          whileHover={{ scale: 1.1, y: -5 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
+          style={{
+            position: 'fixed',
+            bottom: '2rem',
+            right: '2rem',
+            zIndex: 99,
+            cursor: 'pointer',
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            background: 'var(--surface-color)',
+            boxShadow: 'var(--glass-shadow)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid var(--glass-border)',
+            padding: '2px', // Space for the ring
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          onClick={scrollToTop}
         >
-          <path d="m18 15-6-6-6 6" />
-        </svg>
-      </button>
-      <style>{`
-        button:hover {
-          transform: translateY(-6px) scale(1.05) !important;
-          box-shadow: 0 15px 40px -5px rgba(56, 189, 248, 0.8), inset 0 2px 0 rgba(255,255,255,0.5) !important;
-        }
-      `}</style>
-    </>
+            <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+                <CircularProgressbar
+                    value={scrollProgress}
+                    strokeWidth={8}
+                    styles={buildStyles({
+                        pathColor: 'var(--primary-accent)', // Use your CSS variable
+                        trailColor: 'rgba(0,0,0,0.1)',
+                        strokeLinecap: 'butt',
+                        pathTransitionDuration: 0.1
+                    })}
+                />
+                
+                <div style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    <ChevronUp size={24} color="var(--text-primary)" strokeWidth={3} />
+                </div>
+            </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

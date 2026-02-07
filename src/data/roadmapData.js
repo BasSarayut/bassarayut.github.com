@@ -1,36 +1,50 @@
-
 export const roadmapData = [
   {
-    quarter: "Q1 - Q2",
-    title: "Mastering the Craft",
-    category: "Development",
-    color: "var(--primary-accent)",
-    goals: [
-      "Advanced Frontend Architecture (React 19, Performance)",
-      "Backend Scalability (Node.js, Go/Rust basics)",
-      "System Design & Cloud Infrastructure"
+    date: "Q1 2026",
+    title: "Advanced React Patterns",
+    subtitle: "Frontend Mastery",
+    status: "completed",
+    type: "frontend",
+    desc: [
+      "Mastering Custom Hooks & Performance Optimization",
+      "Implementing Complex Framer Motion animations",
+      "State Management with Zustand & Redux Toolkit"
     ]
   },
   {
-    quarter: "Continuous",
-    title: "Global Communication",
-    category: "Language",
-    color: "var(--secondary-accent)",
-    goals: [
-      "Professional English Fluency (Speaking & Writing)",
-      "Technical Documentation & Blogging in English",
-      "Consuming complex engineering resources natively"
+    date: "Q2 2026",
+    title: "Backend Integration",
+    subtitle: "API & Database",
+    status: "in-progress",
+    type: "backend",
+    desc: [
+      "Building robust REST APIs with Node.js & Express",
+      "Database schema design with PostgreSQL",
+      "Authentication & Authorization (JWT, OAuth)"
     ]
   },
   {
-    quarter: "Continuous",
-    title: "Artistic Expression",
-    category: "Creativity",
-    color: "var(--tertiary-accent)",
-    goals: [
-      "Digital Art & Illustration Practice",
-      "Understanding Color Theory & Composition",
-      "Integrating custom assets into web projects"
+    date: "Q3 2026",
+    title: "Full Stack Deployment",
+    subtitle: "DevOps & CI/CD",
+    status: "planned",
+    type: "fullstack",
+    desc: [
+      "Deploying microservices to AWS/Google Cloud",
+      "Setting up Docker & Kubernetes workflows",
+      "Automated Testing & CI/CD Pipelines"
+    ]
+  },
+  {
+    date: "Q4 2026",
+    title: "System Architecture",
+    subtitle: "Senior Level Engineering",
+    status: "planned",
+    type: "architecture",
+    desc: [
+      "Designing scalable distributed systems",
+      "Advanced caching strategies (Redis)",
+      "System design interview prep & patterns"
     ]
   }
 ];
