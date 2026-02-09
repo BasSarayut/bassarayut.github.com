@@ -9,8 +9,8 @@ const Contact = () => {
         {
             icon: <Mail size={24} />,
             label: "Email",
-            value: "sarayut.ap8@gmail.com",
-            link: "mailto:sarayut.ap8@gmail.com",
+            value: "contact@sarayuts.com",
+            link: "mailto:contact@sarayuts.com",
             color: "#EA4335"
         },
         {
