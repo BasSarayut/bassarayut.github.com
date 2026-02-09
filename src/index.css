@@ -114,6 +114,16 @@ button {
   .container {
     padding: 0 1.5rem;
   }
+  
+  .section-padding {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+}
+
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
 .gradient-text {

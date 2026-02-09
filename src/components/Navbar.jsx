@@ -203,7 +203,7 @@ const Navbar = () => {
                             left: 0,
                             width: '100%',
                             height: '100vh',
-                            background: 'var(--surface-color)',
+                            background: 'var(--surface-highlight)',
                             zIndex: 999,
                             display: 'flex',
                             flexDirection: 'column',

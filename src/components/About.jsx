@@ -4,6 +4,7 @@ import { profileData } from '../data/profileData';
 import profileImage from '../assets/image/profile.jpg';
 import Tilt from 'react-parallax-tilt';
 import { motion } from 'framer-motion';
+import GitHubStats from './GitHubStats';
 
 const About = () => {
   return (
@@ -45,12 +46,12 @@ const About = () => {
              </div>
 
              {/* Stats Row */}
-             <div style={{ 
+              <div style={{ 
                 display: 'flex', 
                 gap: '2rem', 
                 marginTop: '3rem',
                 flexWrap: 'wrap'
-             }}>
+              }}>
                 {profileData.stats.map((stat, index) => (
                    <div key={index} style={{ textAlign: 'center' }}>
                       <div className="gradient-text" style={{ 
@@ -70,7 +71,19 @@ const About = () => {
                       </div>
                    </div>
                 ))}
-             </div>
+              </div>
+
+              {/* Live GitHub Stats */}
+              <div style={{ 
+                marginTop: '2rem',
+                paddingTop: '2rem',
+                borderTop: '1px solid var(--glass-border)'
+              }}>
+                <div style={{ fontSize: '0.9rem', color: 'var(--primary-accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '-1rem' }}>
+                    Live GitHub Insights
+                </div>
+                <GitHubStats />
+              </div>
           </div>
 
           {/* Right Column: 3D Image */}

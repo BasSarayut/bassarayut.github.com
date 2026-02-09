@@ -4,6 +4,7 @@ import SEO from '../components/SEO';
 import RevealOnScroll from '../components/RevealOnScroll';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import GitHubStats from '../components/GitHubStats';
 
 const AboutPage = () => {
     const navigate = useNavigate();
@@ -43,7 +44,7 @@ const AboutPage = () => {
             {/* Main Content Grid */}
             <div className="container" style={{ padding: '0 2rem 4rem' }}>
                 
-                {/* Story */}
+                 {/* Story */}
                 <section style={{ marginBottom: '6rem' }}>
                     <RevealOnScroll>
                          <h2 className="gradient-text" style={{ fontSize: '2rem', marginBottom: '2rem' }}>My Story</h2>
@@ -59,6 +60,16 @@ const AboutPage = () => {
                                 </p>
                             ))}
                          </div>
+                    </RevealOnScroll>
+                </section>
+
+                {/* Live Stats */}
+                <section style={{ marginBottom: '6rem' }}>
+                    <RevealOnScroll>
+                        <h2 className="gradient-text" style={{ fontSize: '2rem', marginBottom: '2rem' }}>GitHub Insights</h2>
+                        <div className="glass-card" style={{ padding: '3rem', display: 'flex', justifyContent: 'center' }}>
+                            <GitHubStats />
+                        </div>
                     </RevealOnScroll>
                 </section>
 

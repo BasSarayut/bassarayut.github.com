@@ -66,7 +66,7 @@ const Hero = () => {
         </h2>
         
         <h1 className="animate-slide-up delay-200" style={{ 
-          fontSize: 'clamp(3rem, 8vw, 6rem)', 
+          fontSize: 'clamp(2.5rem, 8vw, 6rem)', 
           fontWeight: 800, 
           marginBottom: '1.5rem',
           lineHeight: 1.1
@@ -76,6 +76,8 @@ const Hero = () => {
             <TypeAnimation
               sequence={[
                 'Sarayut',
+                1000,
+                'a System Analyst',
                 1000,
                 'a Developer',
                 1000,

@@ -2,7 +2,7 @@ import React from 'react';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import Skills from '../components/Skills';
-// import Projects from '../components/Projects';
+import Projects from '../components/Projects';
 import Contact from '../components/Contact';
 import Roadmap from '../components/Roadmap';
 import RevealOnScroll from '../components/RevealOnScroll';
@@ -19,7 +19,7 @@ const Home = () => {
             <About />
             <Skills />
             <Roadmap />
-            {/* <Projects /> */}
+            <Projects />
             
             {/* Blog Preview Section */}
             <section id="blog-preview" className="container" style={{ padding: '6rem 2rem' }}>

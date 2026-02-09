@@ -3,32 +3,78 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-    const [theme, setTheme] = useState(() => {
-        // 1. Persisted User Preference (High Priority)
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) return savedTheme;
-
-        // 2. Real-Time Logic (Requested behavior)
-        // Dark Mode between 6:00 PM (18) and 6:00 AM (6)
-        const hour = new Date().getHours();
-        const isNightTime = hour >= 18 || hour < 6;
-        
-        return isNightTime ? 'dark' : 'light';
+    // Initialize theme from localStorage or default to 'system'
+    const [theme, setThemeState] = useState(() => {
+        return localStorage.getItem('theme') || 'system';
     });
 
+    // State to track the actual active theme ('light' or 'dark')
+    const [resolvedTheme, setResolvedTheme] = useState('light');
+
+    // Function to update theme state and localStorage
+    const setTheme = (newTheme) => {
+        setThemeState(newTheme);
+        localStorage.setItem('theme', newTheme);
+    };
+
+    // Effect to handle theme application and system preference changes
     useEffect(() => {
-        // Update DOM attribute
-        document.documentElement.setAttribute('data-theme', theme);
-        // Save to local storage
-        localStorage.setItem('theme', theme);
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        const applyTheme = () => {
+            let targetTheme = 'light';
+
+            if (theme === 'system') {
+                targetTheme = mediaQuery.matches ? 'dark' : 'light';
+            } else {
+                targetTheme = theme;
+            }
+
+            setResolvedTheme(targetTheme);
+            document.documentElement.setAttribute('data-theme', targetTheme);
+        };
+
+        applyTheme();
+
+        const handleSystemChange = () => {
+            if (theme === 'system') {
+                applyTheme();
+            }
+        };
+
+        mediaQuery.addEventListener('change', handleSystemChange);
+
+        return () => mediaQuery.removeEventListener('change', handleSystemChange);
     }, [theme]);
 
+    // Effect to sync changes across tabs
+    useEffect(() => {
+        const handleStorageChange = (e) => {
+            if (e.key === 'theme') {
+                setThemeState(e.newValue || 'system');
+            }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        return () => window.removeEventListener('storage', handleStorageChange);
+    }, []);
+
+    const resetTheme = () => {
+        setTheme('system');
+    };
+
+    // Helper to toggle between light and dark (skips system)
     const toggleTheme = () => {
-        setTheme(prev => prev === 'light' ? 'dark' : 'light');
+        if (theme === 'system') {
+            const nextTheme = resolvedTheme === 'light' ? 'dark' : 'light';
+            setTheme(nextTheme);
+        } else {
+            setTheme(theme === 'light' ? 'dark' : 'light');
+        }
     };
 
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, resetTheme, toggleTheme }}>
             {children}
         </ThemeContext.Provider>
     );
