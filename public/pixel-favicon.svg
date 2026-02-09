@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges">
+  <!-- Background: Dark Slate (Optional, usually favicons have transparent bg, but pixel art looks good with contrast) -->
+  <!-- <rect width="16" height="16" fill="#020617" rx="2" /> -->
+  
+  <style>
+    .cyan { fill: #38BDF8; }
+    .purple { fill: #A78BFA; }
+    .pink { fill: #F472B6; }
+  </style>
+
+  <!-- Title S Shape in Pixels -->
+  <!-- Row 2 -->
+  <rect x="5" y="2" width="1" height="1" class="cyan" />
+  <rect x="6" y="2" width="1" height="1" class="cyan" />
+  <rect x="7" y="2" width="1" height="1" class="cyan" />
+  <rect x="8" y="2" width="1" height="1" class="purple" />
+  <rect x="9" y="2" width="1" height="1" class="purple" />
+
+  <!-- Row 3 -->
+  <rect x="4" y="3" width="1" height="1" class="cyan" />
+  <rect x="10" y="3" width="1" height="1" class="purple" />
+
+  <!-- Row 4 -->
+  <rect x="4" y="4" width="1" height="1" class="cyan" />
+
+  <!-- Row 5 -->
+  <rect x="5" y="5" width="1" height="1" class="cyan" />
+  <rect x="6" y="5" width="1" height="1" class="cyan" />
+
+  <!-- Row 6 (Middle cross) -->
+  <rect x="7" y="6" width="1" height="1" class="pink" />
+  <rect x="8" y="6" width="1" height="1" class="pink" />
+  <rect x="9" y="6" width="1" height="1" class="purple" />
+
+  <!-- Row 7 -->
+  <rect x="10" y="7" width="1" height="1" class="purple" />
+
+  <!-- Row 8 -->
+  <rect x="10" y="8" width="1" height="1" class="purple" />
+  <rect x="4" y="8" width="1" height="1" class="cyan" opacity="0.5" /> <!-- Glitch effect pixel -->
+
+  <!-- Row 9 -->
+  <rect x="4" y="9" width="1" height="1" class="cyan" />
+  <rect x="10" y="9" width="1" height="1" class="purple" />
+
+  <!-- Row 10 -->
+  <rect x="5" y="10" width="1" height="1" class="cyan" />
+  <rect x="6" y="10" width="1" height="1" class="purple" />
+  <rect x="7" y="10" width="1" height="1" class="purple" />
+  <rect x="8" y="10" width="1" height="1" class="purple" />
+  <rect x="9" y="10" width="1" height="1" class="purple" />
+
+</svg>
