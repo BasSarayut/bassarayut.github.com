@@ -6,14 +6,15 @@ const Roadmap = () => {
     return (
         <section id="roadmap" className="container section-padding">
             <RevealOnScroll>
+                <div className="section-header">
                 <h2 className="gradient-text" style={{ 
                     fontSize: 'clamp(2rem, 5vw, 2.5rem)', 
-                    marginBottom: '3rem', 
-                    textAlign: 'center', 
+                    marginBottom: '0', 
                     display: 'block' 
                 }}>
                     Dev Journey
                 </h2>
+                </div>
                 
                 <div className="roadmap-container">
                     {/* Vertical Line */}
@@ -119,6 +120,12 @@ const Roadmap = () => {
                     border-radius: 50%;
                     z-index: 2;
                     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+                    animation: dot-pulse 3s ease-in-out infinite;
+                }
+
+                @keyframes dot-pulse {
+                    0%, 100% { box-shadow: 0 0 10px rgba(56, 189, 248, 0.2); }
+                    50%      { box-shadow: 0 0 20px rgba(56, 189, 248, 0.5), 0 0 40px rgba(244, 114, 182, 0.2); }
                 }
 
                 .roadmap-item.left .roadmap-dot {

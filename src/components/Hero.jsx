@@ -12,47 +12,6 @@ const Hero = () => {
       overflow: 'hidden',
       paddingTop: '60px' // For fixed navbar
     }}>
-      {/* Background Gradient Mesh */}
-
-      <div style={{
-        position: 'absolute',
-        top: '-10%',
-        left: '-10%',
-        width: '60vw',
-        height: '60vw',
-        background: 'radial-gradient(circle, var(--primary-accent) 0%, transparent 60%)',
-        opacity: 0.12,
-        filter: 'blur(90px)',
-        zIndex: -1,
-        animation: 'slideUp 8s infinite alternate ease-in-out'
-      }}></div>
-      
-      <div style={{
-        position: 'absolute',
-        bottom: '-10%',
-        right: '-5%',
-        width: '50vw',
-        height: '50vw',
-        background: 'radial-gradient(circle, var(--secondary-accent) 0%, transparent 70%)',
-        opacity: 0.12,
-        filter: 'blur(100px)',
-        zIndex: -1,
-        animation: 'slideUp 10s infinite alternate-reverse ease-in-out'
-      }}></div>
-
-       <div style={{
-        position: 'absolute',
-        top: '40%',
-        left: '20%',
-        width: '30vw',
-        height: '30vw',
-        background: 'radial-gradient(circle, var(--tertiary-accent) 0%, transparent 70%)',
-        opacity: 0.08,
-        filter: 'blur(80px)',
-        zIndex: -1,
-        animation: 'slideUp 12s infinite alternate ease-in-out'
-      }}></div>
-
       <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
         <h2 className="animate-fade-in delay-100" style={{ 
           fontSize: '1.2rem', 
@@ -108,23 +67,23 @@ const Hero = () => {
           justifyContent: 'center',
           flexWrap: 'wrap' 
         }}>
-          <button style={{ 
+          <button className="hero-cta-primary" style={{ 
             background: 'linear-gradient(135deg, var(--primary-accent), var(--secondary-accent))', 
             color: '#fff', 
             fontWeight: 700,
             padding: '1rem 2.5rem',
             borderRadius: '50px',
             fontSize: '1.1rem',
-            boxShadow: '0 10px 30px -5px rgba(56, 189, 248, 0.5), inset 0 2px 0 rgba(255,255,255,0.4)',
-            transition: 'transform 0.3s var(--fluid-ease), box-shadow 0.3s ease',
+            boxShadow: '0 10px 30px -5px rgba(56, 189, 248, 0.4), inset 0 2px 0 rgba(255,255,255,0.4)',
             position: 'relative',
             overflow: 'hidden',
-            border: '1px solid rgba(255,255,255,0.2)'
+            border: '1px solid rgba(255,255,255,0.2)',
+            transition: 'all 0.4s var(--fluid-ease)',
           }}>
             View My Work
           </button>
           
-          <button className="glass-card" style={{ 
+          <button className="glass-card hero-cta-secondary" style={{ 
             background: 'var(--surface-color)',
             color: 'var(--text-primary)', 
             fontWeight: 500,
@@ -134,12 +93,24 @@ const Hero = () => {
             border: '1px solid var(--glass-border)',
             borderTop: '1px solid var(--glass-highlight)',
             boxShadow: 'var(--glass-shadow)',
-            transition: 'transform 0.3s var(--fluid-ease)',
+            transition: 'all 0.4s var(--fluid-ease)',
           }}>
             Contact Me
           </button>
         </div>
       </div>
+
+      <style>{`
+        .hero-cta-primary:hover {
+          transform: translateY(-4px) scale(1.05);
+          box-shadow: 0 15px 40px -5px rgba(56, 189, 248, 0.5), 0 0 60px rgba(244, 114, 182, 0.2), inset 0 2px 0 rgba(255,255,255,0.4);
+        }
+        .hero-cta-secondary:hover {
+          transform: translateY(-4px) scale(1.05) !important;
+          border-color: rgba(56, 189, 248, 0.4) !important;
+          box-shadow: var(--glass-shadow), 0 0 30px rgba(56, 189, 248, 0.1) !important;
+        }
+      `}</style>
     </section>
   );
 };

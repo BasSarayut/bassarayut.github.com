@@ -60,10 +60,12 @@ const Contact = () => {
         <section id="contact" className="container" style={{ padding: '6rem 2rem 4rem', textAlign: 'center' }}>
             <RevealOnScroll>
                 <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-                    <h2 className="gradient-text" style={{ fontSize: '3rem', marginBottom: '1rem' }}>Let's Connect</h2>
-                    <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginBottom: '4rem', maxWidth: '600px', margin: '0 auto 4rem' }}>
+                <div className="section-header">
+                    <h2 className="gradient-text" style={{ fontSize: '3rem', marginBottom: '0' }}>Let's Connect</h2>
+                    <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '1.5rem auto 4rem' }}>
                         Whether you have a project in mind or just want to chat about tech, I'm always open to new opportunities.
                     </p>
+                </div>
 
                     <div style={{
                         display: 'grid',
@@ -124,7 +126,9 @@ const Contact = () => {
                                         
                                         // Removing redundant transition since Tilt handles it
                                     }}>
-                                        {React.cloneElement(method.icon, { strokeWidth: 2 })}
+                                        <div style={{ transition: 'transform 0.3s ease' }} className="contact-icon-inner">
+                                          {React.cloneElement(method.icon, { strokeWidth: 2 })}
+                                        </div>
                                     </div>
                                     <div style={{ textAlign: 'left' }}>
                                         <div style={{ fontSize: '0.85rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', fontWeight: 600 }}>
@@ -139,7 +143,23 @@ const Contact = () => {
                         ))}
                     </div>
 
-                    <footer style={{ marginTop: '6rem', fontSize: '0.9rem', color: 'var(--text-tertiary)', borderTop: '1px solid var(--glass-border)', paddingTop: '2rem' }}>
+                    <footer style={{ 
+                        marginTop: '6rem', 
+                        fontSize: '0.9rem', 
+                        color: 'var(--text-tertiary)', 
+                        paddingTop: '2rem',
+                        position: 'relative',
+                    }}>
+                        <div style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: '120px',
+                            height: '2px',
+                            background: 'linear-gradient(90deg, transparent, var(--primary-accent), var(--secondary-accent), transparent)',
+                            borderRadius: '2px',
+                        }} />
                         © {new Date().getFullYear()} Sarayut. Built with React & Vibe Code.
                     </footer>
                 </div>

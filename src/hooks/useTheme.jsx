@@ -73,8 +73,36 @@ export const ThemeProvider = ({ children }) => {
         }
     };
 
+    // Premium toggle with View Transition API ripple effect
+    const toggleThemeWithTransition = (event) => {
+        // Fallback: if View Transition API not supported → instant toggle
+        if (!document.startViewTransition) {
+            toggleTheme();
+            return;
+        }
+
+        // Get click coordinates for the ripple origin
+        const x = event?.clientX ?? window.innerWidth / 2;
+        const y = event?.clientY ?? window.innerHeight / 2;
+
+        // Set CSS custom properties for clip-path center
+        document.documentElement.style.setProperty('--click-x', `${x}px`);
+        document.documentElement.style.setProperty('--click-y', `${y}px`);
+
+        // Start the view transition
+        const transition = document.startViewTransition(() => {
+            toggleTheme();
+        });
+
+        // Clean up custom properties after transition
+        transition.finished.then(() => {
+            document.documentElement.style.removeProperty('--click-x');
+            document.documentElement.style.removeProperty('--click-y');
+        });
+    };
+
     return (
-        <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, resetTheme, toggleTheme }}>
+        <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, resetTheme, toggleTheme, toggleThemeWithTransition }}>
             {children}
         </ThemeContext.Provider>
     );

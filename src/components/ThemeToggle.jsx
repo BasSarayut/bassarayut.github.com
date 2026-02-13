@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
 import { Sun, Moon } from 'lucide-react';
 
 const ThemeToggle = () => {
-    const { theme, toggleTheme } = useTheme();
+    const { resolvedTheme, toggleThemeWithTransition } = useTheme();
+    const [isSpinning, setIsSpinning] = useState(false);
+
+    const handleClick = (e) => {
+        // Trigger icon spin animation
+        setIsSpinning(true);
+        setTimeout(() => setIsSpinning(false), 500);
+
+        // Trigger the ripple theme transition
+        toggleThemeWithTransition(e);
+    };
 
     return (
         <button 
-            onClick={toggleTheme}
+            onClick={handleClick}
             aria-label="Toggle Dark Mode"
             style={{
                 background: 'rgba(255,255,255,0.2)',
@@ -22,6 +32,7 @@ const ThemeToggle = () => {
                 color: 'var(--text-primary)',
                 backdropFilter: 'blur(10px)',
                 transition: 'all 0.3s ease',
+                overflow: 'hidden',
             }}
             onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'scale(1.1)';
@@ -32,13 +43,20 @@ const ThemeToggle = () => {
                 e.currentTarget.style.background = 'rgba(255,255,255,0.2)';
             }}
         >
-            {theme === 'light' ? (
-                // Moon Icon (Switch to Dark)
-                <Moon size={20} strokeWidth={2} />
-            ) : (
-                // Sun Icon (Switch to Light)
-                <Sun size={20} strokeWidth={2} />
-            )}
+            <span 
+                className={`theme-toggle-icon${isSpinning ? ' spinning' : ''}`}
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                {resolvedTheme === 'light' ? (
+                    <Moon size={20} strokeWidth={2} />
+                ) : (
+                    <Sun size={20} strokeWidth={2} />
+                )}
+            </span>
         </button>
     );
 };

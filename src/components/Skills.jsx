@@ -5,12 +5,12 @@ import { motion } from 'framer-motion';
 import { Code2, CloudLightning, Wrench, Terminal, Database, Smartphone } from 'lucide-react';
 
 const Skills = () => {
-    // Map categories to icons
-    const getIcon = (category) => {
-        if (category.includes("Frontend")) return <Code2 size={32} color="#60A5FA" />; // Blue
-        if (category.includes("Backend")) return <Database size={32} color="#34D399" />; // Green
-        if (category.includes("Tools")) return <Wrench size={32} color="#F472B6" />; // Pink
-        return <Terminal size={32} />;
+    // Map categories to icons & accent colors
+    const getCategoryInfo = (category) => {
+        if (category.includes("Frontend")) return { icon: <Code2 size={32} color="#60A5FA" />, accent: 'var(--primary-accent)' };
+        if (category.includes("Backend")) return { icon: <Database size={32} color="#34D399" />, accent: 'var(--tertiary-accent)' };
+        if (category.includes("Tools")) return { icon: <Wrench size={32} color="#F472B6" />, accent: 'var(--secondary-accent)' };
+        return { icon: <Terminal size={32} />, accent: 'var(--primary-accent)' };
     };
 
     const containerVariants = {
@@ -35,15 +35,15 @@ const Skills = () => {
   return (
     <section id="skills" className="container" style={{ padding: '8rem 2rem' }}>
       <RevealOnScroll>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+        <div className="section-header">
              <h2 className="gradient-text" style={{ 
                 fontSize: 'clamp(2.5rem, 5vw, 4rem)', 
-                marginBottom: '1rem', 
+                marginBottom: '0', 
                 display: 'block' 
             }}>
                 Current Tech Stack
             </h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginTop: '1.5rem' }}>
                 The technologies I use to build scalable products.
             </p>
         </div>
@@ -59,7 +59,9 @@ const Skills = () => {
                 gap: '2rem' 
             }}
         >
-          {skillsData.map((group, index) => (
+          {skillsData.map((group, index) => {
+            const { icon, accent } = getCategoryInfo(group.category);
+            return (
             <motion.div 
                 key={index} 
                 variants={itemVariants}
@@ -67,7 +69,8 @@ const Skills = () => {
                 style={{ 
                     padding: '2.5rem', 
                     position: 'relative',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    borderTop: `2px solid ${index === 0 ? 'var(--primary-accent)' : index === 1 ? 'var(--tertiary-accent)' : 'var(--secondary-accent)'}`,
                 }}
             >
                {/* Decorative Gradient Blob */}
@@ -84,15 +87,16 @@ const Skills = () => {
                     zIndex: 0
                }}></div>
 
-              <div style={{ position: 'relative', zIndex: 1 }}>
+              <div style={{ position: 'relative', zIndex: 3 }}>
                   <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
                       <div style={{ 
                           padding: '12px', 
                           background: 'rgba(255,255,255,0.05)', 
-                          borderRadius: '12px',
-                          border: '1px solid var(--glass-border)'
+                          borderRadius: '16px',
+                          border: '1px solid var(--glass-border)',
+                          transition: 'box-shadow 0.3s ease',
                       }}>
-                          {getIcon(group.category)}
+                          {icon}
                       </div>
                       <h3 style={{ fontSize: '1.4rem', color: 'var(--text-primary)' }}>{group.category}</h3>
                   </div>
@@ -105,7 +109,10 @@ const Skills = () => {
                     {group.items.map((skill, idx) => (
                       <motion.span 
                         key={idx}
-                        whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
+                        whileHover={{ 
+                          scale: 1.08,
+                          boxShadow: `0 0 20px ${index === 0 ? 'rgba(56, 189, 248, 0.25)' : index === 1 ? 'rgba(167, 139, 250, 0.25)' : 'rgba(244, 114, 182, 0.25)'}` 
+                        }}
                         style={{ 
                             background: 'rgba(0, 0, 0, 0.03)', 
                             padding: '0.6rem 1.2rem', 
@@ -115,7 +122,7 @@ const Skills = () => {
                             color: 'var(--text-secondary)',
                             fontWeight: 500,
                             cursor: 'default',
-                            transition: 'color 0.2s',
+                            transition: 'all 0.3s ease',
                             boxShadow: '0 2px 5px rgba(0,0,0,0.02)'
                         }}
                       >
@@ -125,7 +132,7 @@ const Skills = () => {
                   </div>
               </div>
             </motion.div>
-          ))}
+          )})}
         </motion.div>
       </RevealOnScroll>
     </section>
@@ -133,3 +140,4 @@ const Skills = () => {
 };
 
 export default Skills;
+

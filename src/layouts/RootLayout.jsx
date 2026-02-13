@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
+import AnimatedBackground from '../components/AnimatedBackground';
 import BackToTop from '../components/BackToTop';
 import WIPBadge from '../components/WIPBadge';
 import { Toaster } from 'sonner';
@@ -11,6 +12,7 @@ const RootLayout = () => {
 
     return (
         <>
+            <AnimatedBackground />
             <Navbar />
             <AnimatePresence mode="wait">
                 <motion.main

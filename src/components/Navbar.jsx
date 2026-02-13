@@ -172,7 +172,7 @@ const Navbar = () => {
                          </div>
                     </div>
 
-                    {/* Reading Progress Bar (Desktop & Mobile) */}
+                    {/* Reading Progress Bar — Gradient */}
                     <motion.div 
                         style={{
                             position: 'absolute',
@@ -180,7 +180,7 @@ const Navbar = () => {
                             left: 0,
                             right: 0,
                             height: '3px',
-                            background: 'var(--primary-accent)',
+                            background: 'linear-gradient(90deg, var(--primary-accent), var(--secondary-accent), var(--tertiary-accent))',
                             scaleX: scaleX,
                             transformOrigin: "0%",
                             zIndex: 5
@@ -253,7 +253,8 @@ const Navbar = () => {
                 )}
             </AnimatePresence>
 
-            <style>{`
+        {/* Premium Nav Styles */}
+        <style>{`
         .nav-item {
           color: var(--text-secondary);
           padding: 0.5rem 1.25rem;
@@ -262,16 +263,32 @@ const Navbar = () => {
           font-size: 0.95rem;
           transition: all 0.3s ease;
           text-decoration: none;
+          position: relative;
+        }
+
+        .nav-item::after {
+          content: '';
+          position: absolute;
+          bottom: 2px;
+          left: 50%;
+          transform: translateX(-50%) scaleX(0);
+          width: 60%;
+          height: 2px;
+          background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent));
+          border-radius: 2px;
+          transition: transform 0.3s ease;
         }
 
         .nav-item:hover {
           color: var(--text-primary);
-          background: rgba(255, 255, 255, 0.8);
         }
-        
-        /* Dark mode adjustment for hover */
-        :global(.dark) .nav-item:hover {
-            background: rgba(255, 255, 255, 0.1);
+
+        .nav-item:hover::after {
+          transform: translateX(-50%) scaleX(1);
+        }
+
+        [data-theme='dark'] .nav-item:hover {
+          color: var(--text-primary);
         }
 
         @media (max-width: 768px) {
@@ -282,16 +299,16 @@ const Navbar = () => {
         .logo-dot {
           width: 8px;
           height: 8px;
-          background: var(--primary-accent);
+          background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
           border-radius: 50%;
-          box-shadow: 0 0 10px var(--primary-accent);
+          box-shadow: 0 0 10px var(--primary-accent), 0 0 20px rgba(244, 114, 182, 0.3);
           animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-          0% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); }
-          70% { box-shadow: 0 0 0 6px rgba(14, 165, 233, 0); }
-          100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
+          0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4); }
+          70% { box-shadow: 0 0 0 8px rgba(56, 189, 248, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
         }
       `}</style>
         </>
