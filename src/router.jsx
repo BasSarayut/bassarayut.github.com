@@ -5,6 +5,7 @@ import BlogPage from './pages/BlogPage';
 import AboutPage from './pages/AboutPage';
 import BlogPostPage from './pages/BlogPostPage';
 import ProjectPage from './pages/ProjectPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
             {
                 path: 'project/:id',
                 element: <ProjectPage />
+            },
+            {
+                path: '*',
+                element: <NotFoundPage />
             }
         ]
     }

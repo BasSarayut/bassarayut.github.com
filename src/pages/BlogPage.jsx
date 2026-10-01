@@ -1,33 +1,11 @@
-import React, { useEffect } from 'react';
-import Blog from '../components/Blog';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight, Search } from 'lucide-react';
+import { blogPosts } from '../data/blogPosts';
 import SEO from '../components/SEO';
 
-const BlogPage = () => {
-  // Scroll to top when entering the page
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  return (
-    <div style={{ paddingTop: '80px', minHeight: '100vh' }}>
-      <SEO title="Blog" description="Deep dives into code, design systems, and cloud architecture." />
-      <div className="container" style={{ textAlign: 'center', padding: '4rem 2rem 2rem' }}>
-        <h1 className="gradient-text" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1rem' }}>
-          The Blog
-        </h1>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}>
-          Deep dives into code, design systems, and cloud architecture.
-        </p>
-      </div>
-      
-      <Blog />
-      
-      {/* Newsletter / Footer area specifically for blog */}
-      <div className="container" style={{ padding: '4rem 2rem', textAlign: 'center' }}>
-        <p style={{ color: 'var(--text-tertiary)' }}>More articles coming soon...</p>
-      </div>
-    </div>
-  );
-};
-
-export default BlogPage;
+export default function BlogPage() {
+  const [query, setQuery] = useState('');
+  const posts = blogPosts.filter(post => `${post.title} ${post.excerpt} ${post.category}`.toLowerCase().includes(query.trim().toLowerCase()));
+  return <section className="shell journal-page"><SEO title="Journal" url="/blog" description="บทความเกี่ยวกับการพัฒนาเว็บ การออกแบบ และเทคโนโลยี จากพอร์ตของ Sarayut" /><header className="journal-header"><h1>Notes along<br /><em>the way.</em></h1><p>พื้นที่เก็บบทความเรื่องการพัฒนาและการออกแบบ<br />สิ่งที่น่าสนใจระหว่างทางของการสร้างซอฟต์แวร์</p></header><label className="search-field"><Search size={19} aria-hidden="true" /><span className="sr-only">ค้นหาบทความ</span><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="ค้นหาบทความหรือหัวข้อ…" /></label><div className="journal-list" aria-live="polite">{posts.length ? posts.map(post => <article key={post.id}><div className="journal-date"><span>{post.category}</span><time>{post.date}</time></div><div><h2><Link to={`/blog/${post.id}`}>{post.title}</Link></h2><p>{post.excerpt}</p></div><Link to={`/blog/${post.id}`} className="icon-button" aria-label={`อ่าน ${post.title}`}><ArrowUpRight size={25} /></Link></article>) : <div className="empty-state"><h2>ยังไม่พบบทความที่ตรงกัน</h2><p>ลองใช้คำอื่น เช่น React, Design หรือ Cloud</p><button className="button button-secondary" onClick={() => setQuery('')}>ดูบทความทั้งหมด</button></div>}</div></section>;
+}

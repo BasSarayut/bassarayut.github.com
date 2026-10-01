@@ -1,86 +1,31 @@
-# 🔮 Sarayut - Liquid Glass Portfolio
+# Sarayut — Software Developer portfolio
 
-A futuristic, high-performance web portfolio built with **React**, designed to showcase the intersection of modern aesthetic capability and engineering precision.
+A Thai-first personal portfolio built with React, Vite and React Router. Warm paper, sage green, self-hosted fonts and real personal context replace the previous glass theme. Includes light/dark themes, selected-work filters, case studies, career and education, searchable journal and contact links.
 
-![Portfolio Banner](https://bassarayut.github.io/og-image.jpg)
+## Develop
 
-## ✨ Core Aesthetics: "Midnight Glass"
-
-The design language follows a custom **"Liquid Glass"** philosophy:
-
-- **Holographic UI**: Elements feature a frosted glass (`backdrop-filter: blur`) effect that adapts to the active theme.
-- **Dynamic Lighting**:
-  - **Day Mode**: Crisp white glass with soft blue nuances.
-  - **Night Mode (Midnight)**: Deep void-blue gradients with neon glows.
-- **3D Interactivity**: Cards physically tilt (`react-parallax-tilt`) and shimmer on interaction.
-- **Cinematic Motion**: Powered by `framer-motion` for Apple-like smooth transitions.
-
-## 🚀 Tech Stack
-
-### Core
-
-- **React 19**: The latest standard for component-based UI.
-- **Vite**: Next-generation build tool for blazing fast HMR and optimized production builds.
-- **React Router 7**: Robust client-side routing with animated page transitions (`AnimatePresence`).
-
-### Visual Engine
-
-- **Framer Motion**: For complex scroll reveals and layout animations.
-- **React Parallax Tilt**: High-fidelity 3D tilt effects for interactive cards.
-- **Lucide React**: Pixel-perfect SVG iconography.
-
-### System & SEO
-
-- **Helmet Async**: For dynamic metadata and SEO management.
-- **JSON-LD**: Structured data injection for Google Knowledge Graph (Person Schema).
-- **Robots/Sitemap**: Automated crawler guidance.
-
-## 🛠️ Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/bassarayut/bassarayut.github.io.git
-
-# Enter directory
-cd bassarayut.github.io
-
-# Install dependencies
-npm install
-
-# Start Local Development Server
+```sh
+npm ci
 npm run dev
-```
-
-## 📦 Building for Production
-
-```bash
-# Generate static build
 npm run build
-
-# Preview production build locally
 npm run preview
 ```
 
-## 🎨 Theme System
+The checked-in `.npmrc` enables legacy peer dependency resolution for the existing React/Helmet combination. Cloudflare Pages is connected to this repository; pushes to `main` trigger the build for `sarayuts.com`. Build command: `npm run build`; output directory: `dist/`. The host must serve `index.html` for client routes such as `/about` and `/project/ill`.
 
-The application features a time-aware **Automatic Dark Mode**:
+Before pushing, run the build and inspect the staged diff. After pushing, verify the Cloudflare Pages commit check and smoke-test the public homepage and deep links. To roll back, revert the release commit and push the revert through the same pipeline; do not force-push shared history.
 
-1.  **System Preference**: Checks OS settings first.
-2.  **Time of Day**: Falls back to Dark Mode between **6 PM - 6 AM**.
-3.  **Manual Override**: Persistent toggle (Sun/Moon) saves preference to `localStorage`.
+## Content
 
-## 📂 Project Structure
+- `PORTFOLIO_CONTEXT.md`: local-only interview context, evidence and open questions. It and `บทสนทนา.md` are intentionally ignored by Git and must not be published.
+- `src/data/profileData.js`: profile, employment and education.
+- `src/data/caseStudies.js`: delivery-location feature, ill. and Notchy.
+- `src/data/blogPosts.js`: existing journal articles, preserved during the redesign.
+- `PRODUCT.md` and `DESIGN.md`: product constraints and visual system.
+- `src/index.css`: design tokens, responsive styles and reduced-motion support.
 
-```
-src/
-├── components/      # Glass UI Components (Contact, Navbar, Tilt Cards)
-├── layouts/         # RootLayout with Page Transitions
-├── pages/           # Route views (Home, Blog, Projects)
-├── hooks/           # Custom Hooks (useTheme)
-├── data/            # Centralized Content (Skills, Menu)
-└── index.css        # CSS Variables for "Liquid Glass" tokens
-```
+Use verified facts, not invented metrics or seniority claims. The delivery and Notchy visuals are labelled schematics, not production screenshots. The ill. image is a capture of the public app; the portrait comes from the existing portfolio. Never include employer source code, customer data or private screenshots in public assets.
 
----
+## Validation
 
-_Designed & Engineered by Sarayut_
+`npm run build` creates the production bundle. `npm run lint` checks the entire repository, including legacy components retained outside the new route tree. There is no automated test suite configured. Browser checks should cover mobile navigation, both themes, project filters and details, education anchors, journal search/empty state, contact actions, keyboard focus and unknown routes.

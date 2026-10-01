@@ -1,48 +1,16 @@
 export const profileData = {
-  title: "Professional Developer",
-  subtitle: "System Analyst | Developer | Mobile & Web",
-  bio_paragraphs: [
-    "I'm a developer at the beginning of my journey, passionate about building mobile and web applications. While I'm still growing my portfolio, I focus on writing clean code and understanding the fundamentals of software engineering.",
-    "Currently exploring Flutter and modern web technologies, I enjoy learning from open source and applying new concepts to my own experiments. I'm eager to collaborate, learn from experienced teams, and take on new challenges.",
-  ],
-  stats: [
-    { label: "Years Experience", value: "2+" },
-    { label: "Projects Completed", value: "0" },
-    { label: "Code Commits", value: "20+" }
-  ],
+  name: 'Sarayut',
+  title: 'Software Developer',
+  email: 'contact@sarayuts.com',
+  github: 'https://github.com/bassarayut',
+  bio: 'ผมชอบทำความเข้าใจปัญหา แล้วสร้างสิ่งที่ทำให้ชีวิตง่ายขึ้น ตั้งแต่แอปที่ใช้ทำงาน ไปจนถึงเครื่องมือเล็ก ๆ ที่อยากใช้เอง',
   experience: [
-    {
-        year: "Q1 2025 - Present",
-        role: "Programmer (Mobile Developer)",
-        company: "Freelance / Open Source",
-        description: "Developing cross-platform mobile applications using Flutter. Focusing on performance optimization and MVVM architecture."
-    },
-    {
-      year: "Q2 2024 - Q4 2024",
-      role: "Mobile Developer (Flutter)",
-      company: "SmartBlockTech Co., Ltd.",
-      description: "Implemented new features for existing mobile apps, improved UI responsiveness, and integrated RESTful APIs. Collaborated with the design team to ensure pixel-perfect implementation."
-    },
-    {
-      year: "Q4 2023 - Q1 2024",
-      role: "Internship Software Engineer",
-      company: "Octagon Interactive",
-      description: "Assisted in the development of web applications, wrote unit tests to ensure code reliability, and participated in daily stand-ups and code reviews."
-    }
+    { year: 'ม.ค. 2025 — ปัจจุบัน', role: 'Programmer', company: 'บริษัท ดอนเมืองพัฒนา จำกัด', description: 'ดูแล E-commerce ของตลาดสี่มุมเมือง ตั้งแต่ Buyer และ Seller App ไปจนถึงเว็บ Admin และ API ร่วมพัฒนาระบบต่อเนื่องตั้งแต่ช่วงเริ่มต้นของทีม', tech: ['Flutter', 'Laravel', 'Node.js', 'MySQL', 'GitHub Actions'] },
+    { year: '5 เดือน', role: 'Mobile Developer', company: 'บริษัท สมาร์ทบล็อคเทค จำกัด', description: 'พัฒนาแอป Flutter ตามแบบ UX/UI และแอปบนอุปกรณ์ POS และ EDC รวมถึงระบบ POS Foodking', tech: ['Flutter', 'POS', 'EDC'] },
+    { year: 'ฝึกงาน · 5 เดือน', role: 'Software Developer Intern', company: 'Octagon Interactive', description: 'พัฒนาแอป Android และ Kiosk เชื่อมเครื่องอ่านบัตรประชาชนและ Passport ทดลองการทำงานร่วมกันของ Hardware และ Software พร้อมแก้ปัญหาหน้างาน', tech: ['Kotlin', 'Java', 'Android', 'Hardware integration'] },
   ],
   education: [
-    {
-      year: "2020 - 2024",
-      degree: "B.Sc. Information and Computer Management",
-      school: "Prince of Songkla University",
-      description: "Focused on software engineering principles, database management, and system analysis. Completed a senior project on automated resource management systems."
-    }
+    { year: '2024', school: 'มหาวิทยาลัยสงขลานครินทร์', degree: 'ปริญญาตรี · การจัดการสารสนเทศและคอมพิวเตอร์', faculty: 'คณะพาณิชยศาสตร์และการจัดการ', gpa: '3.30' },
+    { year: '2019', school: 'วิทยาลัยเทคนิคระนอง', degree: 'ปวช. · อิเล็กทรอนิกส์', faculty: '', gpa: '3.33' },
   ],
-  interests: [
-    { icon: "💻", label: "Coding", desc: "Exploring new technologies & frameworks" },
-    { icon: "🎮", label: "Gaming", desc: "Strategy & RPGs" },
-    { icon: "📚", label: "Reading", desc: "Tech blogs & Self-improvement" },
-    { icon: "✈️", label: "Travel", desc: "Experiencing new cultures" }
-  ],
-  quote: "Simplicity is the soul of efficiency."
 };

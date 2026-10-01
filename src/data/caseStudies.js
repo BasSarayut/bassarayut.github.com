@@ -1,81 +1,25 @@
-
 export const caseStudies = [
   {
-    id: 1,
-    title: "Neon E-Commerce Engine",
-    role: "Lead Frontend Engineer",
-    timeline: "3 Months",
-    description: "A high-performance headless commerce platform built for scale.",
-    image: "https://placehold.co/600x400/38bdf8/ffffff?text=Neon+Commerce",
-    tech: ["React", "Next.js", "GraphQL", "Stripe", "Tailwind"],
-    challenge: `
-      <p>The client needed a platform capable of handling <strong>50,000+ concurrent users</strong> during flash sales without UI degradation. The existing legacy system was built on a monolithic WordPress architecture that suffered from:</p>
-      <ul>
-        <li>Slow TTFB (Time to First Byte) averaging 1.2s</li>
-        <li>Database locking during high traffic</li>
-        <li>Inflexible checkout flows</li>
-      </ul>
-    `,
-    solution: `
-      <p>We decoupled the frontend using a <strong>Headless Architecture</strong>. I led the migration to Next.js, leveraging Static Site Generation (SSG) for product pages and Server Side Rendering (SSR) for the checkout flow.</p>
-      
-      <h3>Key Architectural Decisions:</h3>
-      <ul>
-        <li><strong>Edge Caching:</strong> Implemented Cloudflare Workers to cache API responses at the edge, reducing backend load by 85%.</li>
-        <li><strong>Optimistic UI:</strong> Designed a cart system that updates instantly, syncing with the server in the background to reduce perceived latency.</li>
-        <li><strong>State Management:</strong> Replaced Redux with Zustand for a 60% reduction in bundle size impact.</li>
-      </ul>
-    `,
-    impact: `
-      <p>The launch was a massive success. During the Black Friday event, the system handled a vivid 300% traffic spike with zero downtime.</p>
-      <ul>
-        <li><strong>Performance:</strong> Lighthouse score improved from 45 to 98.</li>
-        <li><strong>Conversion Rate:</strong> Increased by 24% due to the 0.5s faster checkout process.</li>
-        <li><strong>Dev Experience:</strong> Deployment time reduced from 20 mins to 3 mins.</li>
-      </ul>
-    `
+    id: 'delivery-pin', title: 'A better way to find the door.', name: 'Delivery location', category: 'งานประจำ', kind: 'delivery', role: 'Buyer App + API development',
+    description: 'จากที่อยู่ที่ต้องค้นหา สู่พิกัดที่พร้อมนำทาง พัฒนาฟีเจอร์ปักหมุดให้ผู้ซื้อและฝ่ายขนส่งเข้าใจจุดหมายเดียวกัน', tech: ['Flutter', 'Google Maps', 'API'],
+    challenge: 'ผู้ซื้อต้องกรอกที่อยู่เป็นข้อความ ส่วนฝ่ายขนส่งต้องนำที่อยู่ไปค้นหาใน Google Maps อีกครั้งเพื่อหาตำแหน่งบ้าน กระบวนการนี้มีขั้นตอนที่ต้องทำซ้ำก่อนเริ่มนำทาง',
+    solution: 'พัฒนาทั้งหน้าปักหมุดใน Flutter Buyer App และ API ที่เกี่ยวข้อง ให้ผู้ซื้อเลือกตำแหน่งจากแผนที่และบันทึก latitude/longitude ไปพร้อมข้อมูลที่อยู่ เพื่อให้มีตำแหน่งปลายทางที่ผู้ซื้อระบุเอง',
+    impact: 'ฝ่ายขนส่งมีข้อมูลพิกัดประกอบที่อยู่ ช่วยลดขั้นตอนการค้นหาตำแหน่งจากข้อความใหม่อีกครั้ง เป็นการปรับฟีเจอร์ที่เชื่อมประสบการณ์ในแอปเข้ากับการทำงานหน้างาน',
+    note: 'แผนภาพประกอบแนวคิด ใช้ข้อมูลตัวอย่าง ไม่ใช่หน้าจอหรือข้อมูลลูกค้าจากระบบจริง', steps: ['ผู้ซื้อเลือกตำแหน่ง', 'API บันทึกพิกัดพร้อมที่อยู่', 'ขนส่งใช้พิกัดปลายทาง'],
   },
   {
-    id: 2,
-    title: "FinTech Dashboard V2",
-    role: "Full Stack Developer",
-    timeline: "2 Months",
-    description: "Real-time financial data visualization for enterprise clients.",
-    image: "https://placehold.co/600x400/f472b6/ffffff?text=FinTech+Dash",
-    tech: ["Vue.js", "D3.js", "WebSockets", "Go"],
-    challenge: `
-      <p>Traders needed to see stock ticker updates in <strong>real-time (sub-100ms latency)</strong>. The previous REST-polling implementation was thrashing the server and causing UI jank on the client side when rendering thousands of data points.</p>
-    `,
-    solution: `
-      <p>I architected a switch to <strong>WebSockets</strong> for bi-directional communication. On the frontend, I implemented a virtualized list to handle high-frequency updates without blocking the main thread.</p>
-      
-      <h3>Technical Deep Dive:</h3>
-      <p>Using <code>D3.js</code> coupled with Canvas (instead of SVG), I optimized the charting engine to render 50,000+ points at 60fps. I also implemented binary data transfer (Protobufs) instead of JSON to reduce payload size by 40%.</p>
-    `,
-    impact: `
-      <p>The new dashboard is now the standard tool for the firm's 200+ traders.</p>
-      <ul>
-        <li><strong>Latency:</strong> Reduced data delay from 2s to 45ms.</li>
-        <li><strong>CPU Usage:</strong> Client-side CPU usage dropped by 50% thanks to Canvas rendering.</li>
-      </ul>
-    `
+    id: 'ill', title: 'Your screen. Your kind of beautiful.', name: 'ill. wallpaper studio', category: 'โปรเจกต์ส่วนตัว', kind: 'wallpaper', role: 'Personal project',
+    description: 'เครื่องมือทำวอลเปเปอร์ที่เริ่มจากความชอบเพลงและการแต่งหน้าจอ iPhone ให้มีสไตล์ของตัวเอง', tech: ['React', 'TypeScript', 'Canvas'], url: 'https://ill.sarayuts.com/',
+    challenge: 'ผมชอบเปลี่ยนวอลเปเปอร์ iPhone และอยากแต่งภาพตามปกอัลบั้มที่ชอบ แต่ยังหาเครื่องมือที่ให้ผลลัพธ์ถูกใจไม่ได้ จึงเริ่มสร้างเครื่องมือขึ้นมาใช้เอง',
+    solution: 'สร้างสตูดิโอบนเว็บที่เลือกรูป ปรับข้อความ สี และรูปแบบได้ มีเทมเพลตเครื่องเล่นเพลง โพลารอยด์ ปกอัลบั้ม และบัตรคอนเสิร์ต พร้อมภาพจำลอง Lock Screen และการส่งออก PNG',
+    impact: 'ได้เครื่องมือที่เปลี่ยนรูปและเพลงที่ชอบให้เป็นวอลเปเปอร์ในแบบของตัวเอง และเปิดให้คนอื่นลองใช้งานผ่านเว็บได้ โดยงานล่าสุดถูกบันทึกไว้ในเบราว์เซอร์', steps: ['เลือกรูปและเทมเพลต', 'ปรับให้เป็นสไตล์ของคุณ', 'ดาวน์โหลดวอลเปเปอร์'],
   },
   {
-    id: 3,
-    title: "AI Image Generator",
-    role: "UI/UX Designer & Dev",
-    timeline: "4 Weeks",
-    description: "A generative AI tool with a distinct 'Liquid Glass' aesthetic.",
-    image: "https://placehold.co/600x400/a78bfa/ffffff?text=AI+Gen",
-    tech: ["React", "Stable Diffusion API", "Three.js", "Framer Motion"],
-    challenge: `
-      <p>AI tools often feel robotic and complex. The goal was to create an interface that felt <strong>organic, creative, and accessible</strong> to non-technical artists.</p>
-    `,
-    solution: `
-      <p>I focused purely on the <strong>User Experience (UX)</strong>. I hid the complexity of "prompts" behind a visual "Style Mixer" interface. I used <code>Three.js</code> to create a floating 3D orb that changes color and texture based on the generated image mood.</p>
-    `,
-    impact: `
-      <p>Featured on Product Hunt and gained 10,000 users in the first week. Users praised the "magical" feel of the generation process.</p>
-    `
-  }
+    id: 'notchy', title: 'A little space. A little more useful.', name: 'Notchy', category: 'โปรเจกต์ส่วนตัว', kind: 'notch', role: 'Personal macOS project',
+    description: 'เปลี่ยนพื้นที่รอบ notch บน Mac ให้เป็นที่อยู่ของเพลง คลิปบอร์ด และโน้ตที่หยิบใช้ได้ใกล้มือ', tech: ['SwiftUI', 'AppKit', 'macOS'],
+    challenge: 'โปรเจกต์ส่วนตัวที่ทำขึ้นมาใช้งานเอง โดยสำรวจว่าพื้นที่รอบ notch ของ Mac จะช่วยให้เข้าถึงเครื่องมือในชีวิตประจำวันได้อย่างไร',
+    solution: 'พัฒนาแอป macOS ด้วย SwiftUI และ AppKit มีระบบ widget สำหรับควบคุมเพลง ประวัติคลิปบอร์ด โน้ต Shelf และข้อมูลอุปกรณ์ Bluetooth',
+    impact: 'ได้พื้นที่รวมเครื่องมือที่ใช้เองบน macOS และโครงสร้าง widget ที่แยกการทำงานของแต่ละฟีเจอร์ เป็นอีกสนามทดลองในการสร้างประสบการณ์ใช้งานบนเดสก์ท็อป',
+    note: 'ภาพจำลององค์ประกอบของโปรเจกต์ แอปนี้เป็นเครื่องมือส่วนตัว ยังไม่มีลิงก์ดาวน์โหลดสาธารณะ', steps: ['เข้าถึงพื้นที่ notch', 'เลือกเครื่องมือที่ต้องการ', 'กลับไปทำงานต่อ'],
+  },
 ];

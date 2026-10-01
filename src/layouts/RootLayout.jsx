@@ -1,35 +1,16 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
-import AnimatedBackground from '../components/AnimatedBackground';
-import BackToTop from '../components/BackToTop';
-import WIPBadge from '../components/WIPBadge';
-import { Toaster } from 'sonner';
+import Contact from '../components/Contact';
 
-const RootLayout = () => {
-    const location = useLocation();
-
-    return (
-        <>
-            <AnimatedBackground />
-            <Navbar />
-            <AnimatePresence mode="wait">
-                <motion.main
-                    key={location.pathname}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                >
-                    <Outlet />
-                </motion.main>
-            </AnimatePresence>
-            <WIPBadge />
-            <BackToTop />
-            <Toaster richColors position="top-center" />
-        </>
-    );
-};
-
-export default RootLayout;
+export default function RootLayout() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      if (hash) document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+      else window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [pathname, hash]);
+  return <><a className="skip-link" href="#main">ข้ามไปเนื้อหา</a><Navbar key={pathname} /><main id="main" tabIndex={-1}><Outlet /></main><Contact /></>;
+}
