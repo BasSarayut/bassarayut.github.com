@@ -23,6 +23,7 @@ Before pushing, run the build and inspect the staged diff. After pushing, verify
 - `src/data/blogPosts.js`: existing journal articles, preserved during the redesign.
 - `PRODUCT.md` and `DESIGN.md`: product constraints and visual system.
 - `src/index.css`: design tokens, responsive styles and reduced-motion support.
+- `src/seo.js`: titles, descriptions, Open Graph and Person schema for every route. `npm run build` runs `scripts/prerender.mjs`, which writes each route's head into `dist/<route>.html` (plus `404.html` and `sitemap.xml`) so crawlers and link previews see metadata without JavaScript. New projects and posts are picked up from the data files automatically. `public/images/og.jpg` is the 1200×630 share card.
 
 Use verified facts, not invented metrics or seniority claims. The delivery and Notchy visuals are labelled schematics, not production screenshots. The ill. image is a capture of the public app; the portrait comes from the existing portfolio. Never include employer source code, customer data or private screenshots in public assets.
 

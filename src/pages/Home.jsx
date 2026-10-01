@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowDown, ArrowRight, ArrowUpRight, Code2, Coffee, Disc3, Asterisk } from 'lucide-react';
 import SEO from '../components/SEO';
+import { pages } from '../seo';
 import ProjectVisual from '../components/ProjectVisual';
 import Career from '../components/Career';
 import { caseStudies } from '../data/caseStudies';
@@ -13,7 +14,7 @@ export default function Home() {
   const [filter, setFilter] = useState('ทั้งหมด');
   const projects = caseStudies.filter(project => filter === 'ทั้งหมด' || project.category === filter);
   return <>
-    <SEO title="Software Developer" />
+    <SEO {...pages.home} />
     <section className="shell hero">
       <div className="hero-copy"><h1>Good things<br />start with<br /><em>curiosity.</em><span className="hero-period" aria-hidden="true">*</span></h1><div className="hero-intro"><p className="intro-name">Hi, I’m Sarayut. <span>Software Developer.</span></p><p>{profileData.bio}</p></div><div className="hero-actions"><a className="button button-primary" href="#work">ดูสิ่งที่ผมสร้าง <ArrowDown size={18} /></a><Link className="text-link" to="/about">รู้จักผมอีกนิด <ArrowUpRight size={17} /></Link></div></div>
       <div className="hero-portrait"><figure className="portrait-frame"><img src="/images/sarayut.webp" alt="Sarayut" width="600" height="676" fetchPriority="high" /><figcaption><span>Sarayut, away from the keyboard.</span><span>TH</span></figcaption></figure><div className="portrait-note"><Coffee size={25} strokeWidth={1.4} /><span>Code, tea,<br /><em>& a little curiosity.</em></span></div><span className="portrait-side-note">A person behind the pixels.</span></div>

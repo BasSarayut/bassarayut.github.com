@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { caseStudies } from '../data/caseStudies';
 import ProjectVisual from '../components/ProjectVisual';
 import SEO from '../components/SEO';
+import { projectMeta } from '../seo';
 import NotFoundPage from './NotFoundPage';
 
 export default function ProjectPage() {
@@ -11,7 +12,7 @@ export default function ProjectPage() {
   if (!project) return <NotFoundPage />;
   const nextProject = caseStudies[(caseStudies.indexOf(project) + 1) % caseStudies.length];
   return <article className="shell project-page">
-    <SEO title={project.name} description={project.description} url={`/project/${project.id}`} />
+    <SEO {...projectMeta(project)} />
     <Link className="text-link back-link" to="/#work"><ArrowLeft size={17} /> ผลงานทั้งหมด</Link>
     <header className="case-header"><h1>{project.title}</h1><p className="case-introduction">{project.description}</p><div className="case-meta"><div><span>Project</span><strong>{project.name}</strong></div><div><span>My role</span><strong>{project.role}</strong></div><div><span>Tools</span><strong>{project.tech.join(' · ')}</strong></div></div>{project.url && <a className="button button-primary" href={project.url} target="_blank" rel="noreferrer">ลองใช้เว็บไซต์ <ArrowUpRight size={18} /></a>}</header>
     <ProjectVisual kind={project.kind} large />
