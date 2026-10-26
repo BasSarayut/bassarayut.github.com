@@ -3,9 +3,9 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-    // Initialize theme from localStorage or default to 'system'
+    // Initialize theme from localStorage or default to 'light' (Arknights: Endfield Industrial Palette)
     const [theme, setThemeState] = useState(() => {
-        return localStorage.getItem('theme') || 'system';
+        return localStorage.getItem('endfield-theme') || 'light';
     });
 
     // State to track the actual active theme ('light' or 'dark')
@@ -14,7 +14,7 @@ export const ThemeProvider = ({ children }) => {
     // Function to update theme state and localStorage
     const setTheme = (newTheme) => {
         setThemeState(newTheme);
-        localStorage.setItem('theme', newTheme);
+        localStorage.setItem('endfield-theme', newTheme);
     };
 
     // Effect to handle theme application and system preference changes
