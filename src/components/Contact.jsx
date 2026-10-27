@@ -1,17 +1,16 @@
 import { useState } from 'react';
-import { ArrowUpRight, Check, Copy, Crosshair } from 'lucide-react';
+import { ArrowUpRight, Check, Copy } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { profileData } from '../data/profileData';
-import { ScrambleText } from './RevealOnScroll';
 
 export default function Contact() {
   const [copyState, setCopyState] = useState('');
   async function copyEmail() {
     try {
       await navigator.clipboard.writeText(profileData.email);
-      setCopyState('SYS//COPIED: คัดลอกอีเมลแล้ว');
+      setCopyState('คัดลอกอีเมลแล้ว // COPIED TO CLIPBOARD');
     } catch {
-      setCopyState('ERR//CLIPBOARD: คัดลอกไม่ได้ กรุณาเลือกอีเมลแล้วคัดลอกด้วยตัวเอง');
+      setCopyState('คัดลอกไม่ได้ กรุณาเลือกอีเมลแล้วคัดลอกด้วยตัวเอง');
     }
   }
 
@@ -21,7 +20,7 @@ export default function Contact() {
         <div className="contact-top">
           <div>
             <span className="availability">
-              <span /> <ScrambleText text="STATUS // OPEN FOR SOFTWARE DEVELOPER DEPLOYMENT" />
+              <span /> เปิดรับโอกาสงาน Software Developer
             </span>
             <h2>
               Let’s make<br />
@@ -32,33 +31,36 @@ export default function Contact() {
               <br className="desktop-break" /> ผมยินดีคุยถึงสิ่งที่เราจะทำด้วยกันครับ
             </p>
           </div>
-          <Crosshair className="contact-asterisk" aria-hidden="true" />
+          <div className="contact-frontier-stamp" translate="no" aria-hidden="true">
+            <strong>ENDFIELD</strong>
+            OVER THE FRONTIER / INTO THE FRONT
+          </div>
         </div>
         <div className="email-row">
-          <a href={`mailto:${profileData.email}`}>
+          <a className="endfield-capsule" href={`mailto:${profileData.email}`}>
             {profileData.email}
-            <ArrowUpRight aria-hidden="true" />
           </a>
-          <button className="icon-button" onClick={copyEmail} aria-label="คัดลอกอีเมล">
-            {copyState.startsWith('SYS//COPIED') ? <Check size={19} /> : <Copy size={19} />}
+          <button className="button button-secondary" onClick={copyEmail} aria-label="คัดลอกอีเมล">
+            {copyState.startsWith('คัดลอกอีเมลแล้ว') ? <Check size={16} /> : <Copy size={16} />}
+            <span>คัดลอกอีเมล</span>
           </button>
         </div>
         <p className="copy-feedback" role="status">{copyState}</p>
         <div className="footer-bottom">
           <Link className="wordmark" to="/">
-            <span className="wordmark-badge" aria-hidden="true">ENDFIELD</span>
-            SARAYUT<span>//</span>
+            <span className="wordmark-chip" translate="no">ENDFIELD</span>
+            <span className="wordmark-en" style={{ color: '#f5f5f0' }}>SARAYUT</span>
           </Link>
-          <p>TERMINAL // CURIOUS ENGINEERING &amp; TEA BREWING UNIT</p>
+          <p>OVER THE FRONTIER / INTO THE FRONT · MADE WITH CURIOSITY &amp; A CUP OF TEA</p>
           <div className="social-links">
             <a href={profileData.github} target="_blank" rel="noreferrer">
-              GitHub <ArrowUpRight size={13} />
+              [GitHub] <ArrowUpRight size={13} />
             </a>
             <a href="https://line.me/ti/p/~bbassarayut" target="_blank" rel="noreferrer">
-              LINE <ArrowUpRight size={13} />
+              [LINE] <ArrowUpRight size={13} />
             </a>
-            <a href="tel:0613285127">โทร</a>
-            <span>© {new Date().getFullYear()} // VER.4.8</span>
+            <a href="tel:0613285127">[โทร]</a>
+            <span>© {new Date().getFullYear()}</span>
           </div>
         </div>
       </div>

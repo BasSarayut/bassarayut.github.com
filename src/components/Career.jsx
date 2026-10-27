@@ -1,21 +1,19 @@
 import { profileData } from '../data/profileData';
-import RevealOnScroll, { ScrambleText } from './RevealOnScroll';
+import RevealOnScroll from './RevealOnScroll';
 
 export default function Career({ education = false }) {
   return (
     <>
       <div className="career-list">
         {profileData.experience.map((job, index) => (
-          <RevealOnScroll key={job.company} delay={index * 70}>
-            <article className="career-row reticle-box">
+          <RevealOnScroll key={job.company} delay={index * 60}>
+            <article className="career-row">
               <div className="career-period">
                 <span className={index === 0 ? 'career-dot current' : 'career-dot'} />
-                {job.year}
+                // {job.year}
               </div>
               <div className="career-details">
-                <h3>
-                  <ScrambleText text={job.role} scrambleOnMount={false} />
-                </h3>
+                <h3>[{job.role}]</h3>
                 <p className="company-name">{job.company}</p>
                 <p>{job.description}</p>
                 <ul className="tech-list" aria-label="เทคโนโลยี">
@@ -31,16 +29,17 @@ export default function Career({ education = false }) {
       {education && (
         <RevealOnScroll>
           <section className="education-section" id="education">
-            <span className="hud-tag">
-              <ScrambleText text="SEC-EDU // ACADEMIC CREDENTIALS" />
-            </span>
+            <div className="section-kicker">
+              <strong>// EDUCATION</strong>
+              <span>ACADEMIC RECORD</span>
+            </div>
             <h2>Learning foundations.</h2>
             <div className="education-list">
               {profileData.education.map(item => (
-                <article className="reticle-box" key={item.school}>
-                  <span className="education-year">CLASS // จบ {item.year}</span>
+                <article key={item.school}>
+                  <span className="education-year">// จบ {item.year}</span>
                   <div>
-                    <h3>{item.school}</h3>
+                    <h3>[{item.school}]</h3>
                     <p>{item.degree}</p>
                     {item.faculty && <p>{item.faculty}</p>}
                   </div>

@@ -3,115 +3,85 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-    // Initialize theme from localStorage or default to 'light' (Arknights: Endfield Industrial Palette)
-    const [theme, setThemeState] = useState(() => {
-        return localStorage.getItem('endfield-theme') || 'light';
-    });
+  const [theme, setThemeState] = useState(() => {
+    return localStorage.getItem('endfield-scheme') || 'light';
+  });
 
-    // State to track the actual active theme ('light' or 'dark')
-    const [resolvedTheme, setResolvedTheme] = useState('light');
+  const [palette, setPaletteState] = useState(() => {
+    const saved = localStorage.getItem('endfield-palette');
+    return saved === 'wuling' ? 'wuling' : 'valley';
+  });
 
-    // Function to update theme state and localStorage
-    const setTheme = (newTheme) => {
-        setThemeState(newTheme);
-        localStorage.setItem('endfield-theme', newTheme);
+  const [resolvedTheme, setResolvedTheme] = useState('light');
+
+  const setTheme = newTheme => {
+    setThemeState(newTheme);
+    localStorage.setItem('endfield-scheme', newTheme);
+  };
+
+  const setPalette = newPalette => {
+    const next = newPalette === 'wuling' ? 'wuling' : 'valley';
+    setPaletteState(next);
+    localStorage.setItem('endfield-palette', next);
+  };
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const applyTheme = () => {
+      const targetTheme = theme === 'system' ? (mediaQuery.matches ? 'dark' : 'light') : theme;
+      setResolvedTheme(targetTheme);
+      document.documentElement.setAttribute('data-theme', targetTheme);
     };
 
-    // Effect to handle theme application and system preference changes
-    useEffect(() => {
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        
-        const applyTheme = () => {
-            let targetTheme = 'light';
-
-            if (theme === 'system') {
-                targetTheme = mediaQuery.matches ? 'dark' : 'light';
-            } else {
-                targetTheme = theme;
-            }
-
-            setResolvedTheme(targetTheme);
-            document.documentElement.setAttribute('data-theme', targetTheme);
-        };
-
-        applyTheme();
-
-        const handleSystemChange = () => {
-            if (theme === 'system') {
-                applyTheme();
-            }
-        };
-
-        mediaQuery.addEventListener('change', handleSystemChange);
-
-        return () => mediaQuery.removeEventListener('change', handleSystemChange);
-    }, [theme]);
-
-    // Effect to sync changes across tabs
-    useEffect(() => {
-        const handleStorageChange = (e) => {
-            if (e.key === 'theme') {
-                setThemeState(e.newValue || 'system');
-            }
-        };
-
-        window.addEventListener('storage', handleStorageChange);
-        return () => window.removeEventListener('storage', handleStorageChange);
-    }, []);
-
-    const resetTheme = () => {
-        setTheme('system');
+    applyTheme();
+    const handleSystemChange = () => {
+      if (theme === 'system') applyTheme();
     };
+    mediaQuery.addEventListener('change', handleSystemChange);
+    return () => mediaQuery.removeEventListener('change', handleSystemChange);
+  }, [theme]);
 
-    // Helper to toggle between light and dark (skips system)
-    const toggleTheme = () => {
-        if (theme === 'system') {
-            const nextTheme = resolvedTheme === 'light' ? 'dark' : 'light';
-            setTheme(nextTheme);
-        } else {
-            setTheme(theme === 'light' ? 'dark' : 'light');
-        }
-    };
+  useEffect(() => {
+    document.documentElement.setAttribute('data-palette', palette);
+  }, [palette]);
 
-    // Premium toggle with View Transition API ripple effect
-    const toggleThemeWithTransition = (event) => {
-        // Fallback: if View Transition API not supported → instant toggle
-        if (!document.startViewTransition) {
-            toggleTheme();
-            return;
-        }
+  const toggleTheme = () => {
+    const next = resolvedTheme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+  };
 
-        // Get click coordinates for the ripple origin
-        const x = event?.clientX ?? window.innerWidth / 2;
-        const y = event?.clientY ?? window.innerHeight / 2;
+  const togglePalette = () => {
+    setPalette(palette === 'valley' ? 'wuling' : 'valley');
+  };
 
-        // Set CSS custom properties for clip-path center
-        document.documentElement.style.setProperty('--click-x', `${x}px`);
-        document.documentElement.style.setProperty('--click-y', `${y}px`);
+  const replayBoot = () => {
+    window.dispatchEvent(new CustomEvent('endfield:replay-boot'));
+  };
 
-        // Start the view transition
-        const transition = document.startViewTransition(() => {
-            toggleTheme();
-        });
-
-        // Clean up custom properties after transition
-        transition.finished.then(() => {
-            document.documentElement.style.removeProperty('--click-x');
-            document.documentElement.style.removeProperty('--click-y');
-        });
-    };
-
-    return (
-        <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, resetTheme, toggleTheme, toggleThemeWithTransition }}>
-            {children}
-        </ThemeContext.Provider>
-    );
+  return (
+    <ThemeContext.Provider
+      value={{
+        theme,
+        resolvedTheme,
+        setTheme,
+        toggleTheme,
+        palette,
+        setPalette,
+        togglePalette,
+        replayBoot,
+      }}
+    >
+      {children}
+    </ThemeContext.Provider>
+  );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => {
-    const context = useContext(ThemeContext);
-    if (!context) {
-        throw new Error("useTheme must be used within a ThemeProvider");
-    }
-    return context;
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
 };

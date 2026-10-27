@@ -4,61 +4,64 @@ import { caseStudies } from '../data/caseStudies';
 import ProjectVisual from '../components/ProjectVisual';
 import SEO from '../components/SEO';
 import { projectMeta } from '../seo';
-import RevealOnScroll, { ScrambleText, TelemetryBar } from '../components/RevealOnScroll';
+import RevealOnScroll from '../components/RevealOnScroll';
 import NotFoundPage from './NotFoundPage';
 
 export default function ProjectPage() {
   const { id } = useParams();
   const project = caseStudies.find(item => item.id === id);
   if (!project) return <NotFoundPage />;
-  const nextProject = caseStudies[(caseStudies.indexOf(project) + 1) % caseStudies.length];
+  const index = caseStudies.indexOf(project);
+  const nextProject = caseStudies[(index + 1) % caseStudies.length];
 
   return (
     <article className="shell project-page">
       <SEO {...projectMeta(project)} />
       <Link className="text-link back-link" to="/#work">
-        <ArrowLeft size={16} /> ผลงานทั้งหมด
+        <ArrowLeft size={15} /> [ผลงานทั้งหมด]
       </Link>
       <header className="case-header">
-        <span className="hud-tag">
-          <ScrambleText text={`CASE FILE // ${project.id.toUpperCase()}`} />
-        </span>
+        <div className="section-kicker">
+          <strong>{`0${index + 1} / 0${caseStudies.length}`}</strong>
+          <span>// CASE FILE · [{project.category}]</span>
+        </div>
         <h1>{project.title}</h1>
         <p className="case-introduction">{project.description}</p>
         <div className="case-meta">
-          <div className="reticle-box">
-            <span>MODULE // Project</span>
-            <strong>{project.name}</strong>
+          <div>
+            <span>Project / โปรเจกต์</span>
+            <strong>[{project.name}]</strong>
           </div>
-          <div className="reticle-box">
-            <span>ASSIGNMENT // My role</span>
+          <div>
+            <span>My role / บทบาท</span>
             <strong>{project.role}</strong>
           </div>
-          <div className="reticle-box">
-            <span>STACK // Tools</span>
+          <div>
+            <span>Tools / เทคโนโลยี</span>
             <strong>{project.tech.join(' · ')}</strong>
           </div>
         </div>
         {project.url && (
-          <a className="button button-primary" href={project.url} target="_blank" rel="noreferrer">
-            ลองใช้เว็บไซต์ <ArrowUpRight size={17} />
+          <a className="endfield-capsule" href={project.url} target="_blank" rel="noreferrer">
+            ลองใช้เว็บไซต์
           </a>
         )}
       </header>
       <ProjectVisual kind={project.kind} large />
-      {project.note && <p className="visual-note">NOTE // {project.note}</p>}
+      {project.note && <p className="visual-note">// หมายเหตุ: {project.note}</p>}
       <div className="case-story">
         {[
-          { code: 'PHASE 01', title: 'จุดเริ่มต้น', text: project.challenge, sync: 100 },
-          { code: 'PHASE 02', title: 'สิ่งที่ลงมือทำ', text: project.solution, sync: 100 },
-          { code: 'PHASE 03', title: 'สิ่งที่เปลี่ยนไป', text: project.impact, sync: 100 },
+          { code: '01 / 03', title: 'จุดเริ่มต้น', text: project.challenge },
+          { code: '02 / 03', title: 'สิ่งที่ลงมือทำ', text: project.solution },
+          { code: '03 / 03', title: 'สิ่งที่เปลี่ยนไป', text: project.impact },
         ].map(section => (
           <RevealOnScroll key={section.title}>
-            <section className="reticle-box">
+            <section>
               <div>
-                <span className="hud-serial">{section.code}</span>
-                <h2>{section.title}</h2>
-                <TelemetryBar label={section.code} value={section.sync} code="COMPLETE" />
+                <div className="section-kicker">
+                  <strong>{section.code}</strong>
+                </div>
+                <h2>[{section.title}]</h2>
               </div>
               <p>{section.text}</p>
             </section>
@@ -69,15 +72,15 @@ export default function ProjectPage() {
         {project.steps.map(step => (
           <li key={step}>
             {step}
-            <ArrowRight size={16} aria-hidden="true" />
+            <ArrowRight size={15} aria-hidden="true" />
           </li>
         ))}
       </ol>
-      <Link className="next-project reticle-box" to={`/project/${nextProject.id}`}>
+      <Link className="next-project" to={`/project/${nextProject.id}`}>
         <span>
-          NEXT TRANSMISSION //<strong>{nextProject.name}</strong>
+          NEXT // โปรเจกต์ถัดไป<strong>[{nextProject.name}]</strong>
         </span>
-        <ArrowUpRight size={30} />
+        <ArrowUpRight size={28} />
       </Link>
     </article>
   );

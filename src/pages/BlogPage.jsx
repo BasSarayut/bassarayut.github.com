@@ -4,7 +4,7 @@ import { ArrowUpRight, Search } from 'lucide-react';
 import { blogPosts } from '../data/blogPosts';
 import SEO from '../components/SEO';
 import { pages } from '../seo';
-import RevealOnScroll, { ScrambleText } from '../components/RevealOnScroll';
+import RevealOnScroll from '../components/RevealOnScroll';
 
 export default function BlogPage() {
   const [query, setQuery] = useState('');
@@ -17,9 +17,10 @@ export default function BlogPage() {
       <SEO {...pages.blog} />
       <header className="journal-header">
         <div>
-          <span className="hud-tag">
-            <ScrambleText text="ARCHIVE // PRTS LOGS" />
-          </span>
+          <div className="section-kicker">
+            <strong>// NOTICE</strong>
+            <span>01 / 0{blogPosts.length} · ARCHIVE</span>
+          </div>
           <h1>
             Notes along<br />
             <em>the way.</em>
@@ -31,34 +32,32 @@ export default function BlogPage() {
         </p>
       </header>
       <label className="search-field">
-        <Search size={18} aria-hidden="true" />
+        <Search size={17} aria-hidden="true" />
         <span className="sr-only">ค้นหาบทความ</span>
         <input
           type="search"
           value={query}
           onChange={event => setQuery(event.target.value)}
-          placeholder="QUERY // ค้นหาบทความหรือหัวข้อ…"
+          placeholder="// ค้นหาบทความหรือหัวข้อ…"
         />
       </label>
       <div className="journal-list" aria-live="polite">
         {posts.length ? (
           posts.map((post, idx) => (
-            <RevealOnScroll key={post.id} delay={idx * 60}>
-              <article className="reticle-box">
+            <RevealOnScroll key={post.id} delay={idx * 50}>
+              <article>
                 <div className="journal-date">
-                  <span>LOG // {post.category}</span>
+                  <span>// {post.category}</span>
                   <time>{post.date}</time>
                 </div>
                 <div>
                   <h2>
-                    <Link to={`/blog/${post.id}`}>
-                      <ScrambleText text={post.title} scrambleOnMount={false} />
-                    </Link>
+                    <Link to={`/blog/${post.id}`}>[[{post.title}]]</Link>
                   </h2>
                   <p>{post.excerpt}</p>
                 </div>
                 <Link to={`/blog/${post.id}`} className="icon-button" aria-label={`อ่าน ${post.title}`}>
-                  <ArrowUpRight size={20} />
+                  <ArrowUpRight size={18} />
                 </Link>
               </article>
             </RevealOnScroll>
@@ -67,8 +66,8 @@ export default function BlogPage() {
           <div className="empty-state">
             <h2>ยังไม่พบบทความที่ตรงกัน</h2>
             <p>ลองใช้คำอื่น เช่น React, Design หรือ Cloud</p>
-            <button className="button button-secondary" onClick={() => setQuery('')}>
-              ดูบทความทั้งหมด
+            <button className="button button-primary" onClick={() => setQuery('')}>
+              [ดูบทความทั้งหมด]
             </button>
           </div>
         )}
